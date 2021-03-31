@@ -37,6 +37,13 @@ class DBStorage():
 
     def all(self, cls=None):
         """ returns a dictionary of databases """
+        from models.base_model import BaseModel
+        from models.user import User
+        from models.place import Place
+        from models.state import State
+        from models.city import City
+        from models.amenity import Amenity
+        from models.review import Review
         if not cls:
             for instance in self.__session.query().all():
                 return self.__session
@@ -61,11 +68,10 @@ class DBStorage():
 
     def new(self, obj):
         """ add the object to the current db session """
-        self.__session.all().update()
+        self.__session.add()
 
     def save(self):
         """ commit changes of current database session """
-        self.__session.add()
         self.__session.commit()
 
     def delete(self, obj=None):

@@ -42,7 +42,8 @@ class BaseModel:
 
         for key, value in kwargs.items():
             if "__class__" not in key:
-                setattr(self, key, value)
+                setattr(self.__dict__, key, value)
+
 
     def __str__(self):
         """Returns a string representation of the instance"""
@@ -57,15 +58,17 @@ class BaseModel:
 
     def to_dict(self):
         """Convert instance into dict format"""
-        cdict = __self.__dict__
-        if '_sa_instance_state' in cdict:
-            del cdict['_sa_instance_state']
+        dictionary = {}
+        dictionary.update(self.__dict__)
 
-        cdict['__class__'] = self.__class__.__name__
-        cdict['updated_at'] = self.updated_at.strftime("%Y-%m-%dT%H:%M:%S.%f")
-        cdict['created_at'] = self.created_at.strftime("%Y-%m-%dT%H:%M:%S.%f")
+        if '_sa_instance_state' in dictionary:
+            del dictionary['_sa_instance_state']
 
-        return cdict
+        dictionary['__class__'] = self.__class__.__name__
+        dictionary['updated_at'] = self.updated_at.strftime("%Y-%m-%dT%H:%M:%S.%f")
+        dictionary['created_at'] = self.created_at.strftime("%Y-%m-%dT%H:%M:%S.%f")
+
+        return dictionary
 
     def delete(self):
         """ Delete an instance """
