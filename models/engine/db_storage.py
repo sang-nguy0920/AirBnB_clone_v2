@@ -25,14 +25,14 @@ class DBStorage():
     def __init__(self):
         """ creates the engine """
 
-        engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'
+        self.__engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'
                            .format("hbnb_dev", "hbnb_dev_pwd", "hbnb_dev_db"), pool_pre_ping=True)
-        Session = sessionmaker(bind=engine)
+        Session = sessionmaker(bind=self.__engine)
         session = Session()
         return (None)
 
         if (hbnb_test):
-            cur = engine.cursor()
+            cur = self.__engine.cursor()
             cur.execute("DROP TABLES")
 
     def all(self, cls=None):
@@ -85,4 +85,4 @@ class DBStorage():
 
         # Base.metadata.create_all(engine)
 
-        self.__session = scoped_session(sessionmaker(bind=engine), expire_on_commit=False)
+        self.__session = scoped_session(sessionmaker(bind=self.__engine))
