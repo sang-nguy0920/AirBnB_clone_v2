@@ -145,7 +145,7 @@ class HBNBCommand(cmd.Cmd):
             storage.save()
         except Exception as e:
             print(e)
-            print(" ** class doesn't exist **")
+            print(" ** 1 class doesn't exist **")
 
     def help_create(self):
         """ Help information for the create method """
@@ -225,17 +225,36 @@ class HBNBCommand(cmd.Cmd):
         if args:
             args = args.split(' ')[0]  # remove possible trailing args
             if args not in HBNBCommand.classes:
-                print("** 4 class doesn't exist **")
+                print("** class doesn't exist **")
                 return
-            for k, v in storage.all(args).items():
+            for k, v in storage._FileStorage__objects.items():
                 if k.split('.')[0] == args:
                     print_list.append(str(v))
         else:
-            for k, v in storage.all(args).items():
+            for k, v in storage._FileStorage__objects.items():
                 print_list.append(str(v))
 
         # print(print_list)
         print('[%s]' % ', '.join(map(str, print_list)))
+
+#    def do_all(self, args):
+#        """ Shows all objects, or all objects of a class"""
+#        print_list = []
+
+#        if args:
+#            args = args.split(' ')[0]  # remove possible trailing args
+#            if args not in HBNBCommand.classes:
+#                print("** 4 class doesn't exist **")
+#                return
+#            for k, v in storage.all(args).items():
+#                if k.split('.')[0] == args:
+#                    print_list.append(str(v))
+#        else:
+#            for k, v in storage.all(args).items():
+#                print_list.append(str(v))
+
+        # print(print_list)
+#        print('[%s]' % ', '.join(map(str, print_list)))
 
     def help_all(self):
         """ Help information for the all command """
