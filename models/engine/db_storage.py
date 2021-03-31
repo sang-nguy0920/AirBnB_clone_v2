@@ -12,6 +12,7 @@ from sqlalchemy.orm import scoped_session
 
 
 class DBStorage():
+
     """inits session"""
     __engine = None
     __session = None
@@ -20,13 +21,15 @@ class DBStorage():
     password = getenv('HBNB_MYSQL_PWD')
     host = getenv('HBNB_MYSQL_HOST')
     database = getenv('HBNB_MYSQL_DB')
-    
 
     def __init__(self):
         """ creates the engine """
 
         self.__engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'
-                           .format("hbnb_dev", "hbnb_dev_pwd", "hbnb_dev_db"), pool_pre_ping=True)
+                                      .format("hbnb_dev",
+                                              "hbnb_dev_pwd",
+                                              "hbnb_dev_db"),
+                                      pool_pre_ping=True)
         Session = sessionmaker(bind=self.__engine)
         session = Session()
         return (None)

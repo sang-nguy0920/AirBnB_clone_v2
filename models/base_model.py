@@ -44,7 +44,6 @@ class BaseModel:
             if "__class__" not in key:
                 setattr(self, key, value)
 
-
     def __str__(self):
         """Returns a string representation of the instance"""
         return ("[{}] ({}) {}".format(self.__class__.__name__,
@@ -65,8 +64,10 @@ class BaseModel:
             del dictionary['_sa_instance_state']
 
         dictionary['__class__'] = self.__class__.__name__
-        dictionary['updated_at'] = self.updated_at.strftime("%Y-%m-%dT%H:%M:%S.%f")
-        dictionary['created_at'] = self.created_at.strftime("%Y-%m-%dT%H:%M:%S.%f")
+        dictionary['updated_at'] = self.updated_at.strftime(
+            "%Y-%m-%dT%H:%M:%S.%f")
+        dictionary['created_at'] = self.created_at.strftime(
+            "%Y-%m-%dT%H:%M:%S.%f")
 
         return dictionary
 

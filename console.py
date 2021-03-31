@@ -120,7 +120,7 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print("** class name missing **")
             return
-        try:    
+        try:
             args = shlex.split(args, posix=False)
             new_inst = eval(args[0])()
             if len(args) > 1:
@@ -242,7 +242,7 @@ class HBNBCommand(cmd.Cmd):
 #        print_list = []
 
 #        if args:
-#            args = args.split(' ')[0]  # remove possible trailing args
+# args = args.split(' ')[0]  # remove possible trailing args
 #            if args not in HBNBCommand.classes:
 #                print("** 4 class doesn't exist **")
 #                return
