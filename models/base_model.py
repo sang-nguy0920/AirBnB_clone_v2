@@ -13,6 +13,7 @@ Base = declarative_base()
 
 
 class BaseModel:
+
     """A base class for all hbnb models"""
     id = Column(String(60), nullable=False, primary_key=True)
     created_at = Column(DateTime, nullable=False, default=datetime.utcnow())
@@ -21,20 +22,22 @@ class BaseModel:
     def __init__(self, *args, **kwargs):
         """Instatntiates a new model"""
 
-
 #        if (len(kwargs) == 0):
- #           self.id = Column(String(60), (uuid.uuid4()), nullable=False, primary_key=True)
-  #          self.created_at = Column(DateTime, nullable=False, default=datetime.utcnow())
-   #         self.updated_at = Column(DateTime, nullable=False, default=datetime.utcnow())
-    #    else:
+#           self.id = Column(String(60), (uuid.uuid4()),\
+#   nullable=False, primary_key=True)
+#           self.created_at = Column(DateTime, nullable=False,\
+#   default=datetime.utcnow())
+#           self.updated_at = Column(DateTime, nullable=False,\
+#   default=datetime.utcnow())
+#      else:
         try:
             kwargs['updated_at'] = datetime.strptime(kwargs['updated_at'],
-                                                 '%Y-%m-%dT%H:%M:%S.%f')
+                                                     '%Y-%m-%dT%H:%M:%S.%f')
             kwargs['created_at'] = datetime.strptime(kwargs['created_at'],
-                                                 '%Y-%m-%dT%H:%M:%S.%f')
+                                                     '%Y-%m-%dT%H:%M:%S.%f')
         except KeyError:
             self.id = str(uuid.uuid4())
-            self.created_at = datetime.now() 
+            self.created_at = datetime.now()
             self.updated_at = datetime.now()
 
         for key, value in kwargs.items():
@@ -61,7 +64,7 @@ class BaseModel:
         cdict['__class__'] = self.__class__.__name__
         cdict['updated_at'] = self.updated_at.strftime("%Y-%m-%dT%H:%M:%S.%f")
         cdict['created_at'] = self.created_at.strftime("%Y-%m-%dT%H:%M:%S.%f")
-          
+
         return cdict
 
     def delete(self):
