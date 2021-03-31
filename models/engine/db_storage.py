@@ -6,13 +6,6 @@ import os
 from os import getenv
 import sys
 from sqlalchemy.ext.declarative import declarative_base
-from models.base_model import BaseModel
-from models.user import User
-from models.place import Place
-from models.state import State
-from models.city import City
-from models.amenity import Amenity
-from models.review import Review
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm import scoped_session
@@ -22,10 +15,11 @@ class DBStorage():
     """inits session"""
     __engine = None
     __session = None
-    # user = os.environ('HBNB_MYSQL_USER')
-    # password = os.environ('HBNB_MYSQL_PWD')
-    # host = os.environ('HBNB_MYSQL_HOST')
-    # database = os.environ('HBNB_MYSQL_DB')
+
+    user = getenv('HBNB_MYSQL_USER')
+    password = getenv('HBNB_MYSQL_PWD')
+    host = getenv('HBNB_MYSQL_HOST')
+    database = getenv('HBNB_MYSQL_DB')
     
 
     def __init__(self):
