@@ -42,7 +42,7 @@ class BaseModel:
 
         for key, value in kwargs.items():
             if "__class__" not in key:
-                setattr(self.__dict__, key, value)
+                setattr(self, key, value)
 
 
     def __str__(self):
