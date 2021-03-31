@@ -140,9 +140,9 @@ class HBNBCommand(cmd.Cmd):
                     setattr(new_inst, key, value)
 #            storage.new(new_inst)
 #            new_inst.save()
-            storage.save()
+            new_inst.save()
             print(new_inst.id)
-            storage.save()
+#            storage.save()
         except Exception as e:
             print(e)
             print(" ** 1 class doesn't exist **")
