@@ -142,7 +142,7 @@ class HBNBCommand(cmd.Cmd):
 #            new_inst.save()
             storage.save()
             print(new_inst.id)
-#            storage.save()
+            storage.save()
         except Exception as e:
             print(e)
             print(" ** 1 class doesn't exist **")
