@@ -120,7 +120,7 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print("** class name missing **")
             return
-        try:
+        try:    
             args = shlex.split(args, posix=False)
             new_inst = eval(args[0])()
             if len(args) > 1:
@@ -139,8 +139,10 @@ class HBNBCommand(cmd.Cmd):
                         continue
                     setattr(new_inst, key, value)
 #            storage.new(new_inst)
-                storage.save()
-                print(new_inst.id)
+#            new_inst.save()
+            storage.save()
+            print(new_inst.id)
+            storage.save()
         except Exception as e:
             print(e)
             print(" ** class doesn't exist **")
