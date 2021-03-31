@@ -17,7 +17,7 @@ class City(BaseModel, Base):
         state_id = Column(String(60), ForeignKey('states.id'), nullable=False)
         name = Column(String(128), nullable=False)
         state = relationship("State", backref="City")
-        places = relationship("Place", cascade="all, delete-orphan")
+        #places = relationship("Place", cascade="all, delete-orphan")
 
     else:
         name = ""
