@@ -48,15 +48,15 @@ class BaseModel:
 
     def to_dict(self):
         """Convert instance into dict format"""
-        dictionary = __self.__dict__
-        if '_sa_instance_state' in dictionary:
-            del dictionary['_sa_instance_state']
+        cdict = __self.__dict__
+        if '_sa_instance_state' in cdict:
+            del cdict['_sa_instance_state']
 
-        dictionary['__class__'] = self.__class__.__name__
-        dictionary['updated_at'] = self.updated_at.strftime("%Y-%m-%dT%H:%M:%S.%f")
-        dictionary['created_at'] = self.created_at.strftime("%Y-%m-%dT%H:%M:%S.%f")
+        cdict['__class__'] = self.__class__.__name__
+        cdict['updated_at'] = self.updated_at.strftime("%Y-%m-%dT%H:%M:%S.%f")
+        cdict['created_at'] = self.created_at.strftime("%Y-%m-%dT%H:%M:%S.%f")
           
-        return dictionary
+        return cdict
 
     def delete(self):
         """ Delete an instance """
