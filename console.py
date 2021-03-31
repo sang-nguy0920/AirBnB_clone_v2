@@ -138,9 +138,8 @@ class HBNBCommand(cmd.Cmd):
                     else:
                         continue
                     setattr(new_inst, key, value)
-            storage.save()
+            new_inst.save()
             print(new_inst.id)
-            storage.save()
 
         except Exception as e:
             print(e)
