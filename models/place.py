@@ -1,12 +1,14 @@
 #!/usr/bin/python3
 """ Place Module for HBNB project """
 
+
 import models
 from models.base_model import BaseModel, Base
 import sqlalchemy
 from sqlalchemy import Column, String, Integer, Float, ForeignKey, Table
 from sqlalchemy.orm import relationship
 from os import getenv
+
 
 place_amenity = Table('place_amenity', Base.metadata,
                       Column('place_id', String(60), ForeignKey('places.id'),
@@ -15,6 +17,7 @@ place_amenity = Table('place_amenity', Base.metadata,
                              ForeignKey('amenities.id'),
                              primary_key=True, nullable=False)
                       )
+
 
 class Place(BaseModel, Base):
 
