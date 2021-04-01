@@ -7,9 +7,23 @@ from os import getenv
 import sys
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.orm import scoped_session
+from sqlalchemy.orm import sessionmaker, Session, scoped_session
+from models.base_model import BaseModel
+from models.user import User
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 
+cdict = {
+    'BaseModel': BaseModel,
+    'User': User,
+    'State': State,
+    'City': City,
+    'Amenity': Amenity,
+    'Place': Place,
+    'Review': Review}
 
 class DBStorage():
 
@@ -40,13 +54,18 @@ class DBStorage():
 
     def all(self, cls=None):
         """ returns a dictionary of databases """
-        from models.base_model import BaseModel
-        from models.user import User
-        from models.place import Place
-        from models.state import State
-        from models.city import City
-        from models.amenity import Amenity
-        from models.review import Review
+        db_dict = {}
+        if cls is not None:
+            for instance in self.__session.query(cdict[cls]).all():
+                db_dict[cdict[cls].__name__ + "." + cdict[cls].id] = instance
+            return db_dict
+        else:
+            for i in cdict:
+                find = self.__session.query(cdict[i]).all()
+                for y in find:
+                    db_dict[instance.__class__.__name__ + "." + instance.id] = instance
+            return db_dict
+        
         if not cls:
             for instance in self.__session.query().all():
                 return self.__session
@@ -84,7 +103,7 @@ class DBStorage():
 
     def reload(self):
         """ create all tables in the database """
-        from models.base_model import BaseModel
+        from models.base_model import BaseModel, Base
         from models.user import User
         from models.place import Place
         from models.state import State
@@ -92,6 +111,7 @@ class DBStorage():
         from models.amenity import Amenity
         from models.review import Review
 
-        # Base.metadata.create_all(engine)
+        Base.metadata.create_all(self.__engine)
 
-        self.__session = scoped_session(sessionmaker(bind=self.__engine))
+        sesh = sessionmaker(bind=self.__engine, expire_on_commit=False)
+        self.__session = scoped_session(sesh)
