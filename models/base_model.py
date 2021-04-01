@@ -60,15 +60,13 @@ class BaseModel:
         dictionary = {}
         dictionary.update(self.__dict__)
 
-        if '_sa_instance_state' in dictionary:
-            del dictionary['_sa_instance_state']
-
         dictionary['__class__'] = self.__class__.__name__
         dictionary['updated_at'] = self.updated_at.strftime(
             "%Y-%m-%dT%H:%M:%S.%f")
         dictionary['created_at'] = self.created_at.strftime(
             "%Y-%m-%dT%H:%M:%S.%f")
-
+        if '_sa_instance_state' in self.__dict__:
+            del(self.__dict__['_sa_instance_state'])
         return dictionary
 
     def delete(self):
