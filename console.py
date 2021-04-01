@@ -144,7 +144,7 @@ class HBNBCommand(cmd.Cmd):
 #            storage.save()
         except Exception as e:
             print(e)
-            print(" ** 1 class doesn't exist **")
+            print(" ** class doesn't exist **")
 
     def help_create(self):
         """ Help information for the create method """
@@ -166,7 +166,7 @@ class HBNBCommand(cmd.Cmd):
             return
 
         if c_name not in HBNBCommand.classes:
-            print("** 2 class doesn't exist **")
+            print("** class doesn't exist **")
             return
 
         if not c_id:
@@ -197,7 +197,7 @@ class HBNBCommand(cmd.Cmd):
             return
 
         if c_name not in HBNBCommand.classes:
-            print("** 3 class doesn't exist **")
+            print("** class doesn't exist **")
             return
 
         if not c_id:
@@ -224,7 +224,7 @@ class HBNBCommand(cmd.Cmd):
         if args:
             args = args.split(' ')[0]  # remove possible trailing args
             if args not in HBNBCommand.classes:
-                print("** 4 class doesn't exist **")
+                print("** class doesn't exist **")
                 return
             for k, v in storage.all(args).items():
                 if k.split('.')[0] == args:
@@ -265,7 +265,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         if c_name not in HBNBCommand.classes:  # class name invalid
-            print("** 5 class doesn't exist **")
+            print("** class doesn't exist **")
             return
 
         # isolate id from args
