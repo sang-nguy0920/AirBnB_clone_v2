@@ -18,4 +18,4 @@ class City(BaseModel, Base):
     name = Column(String(128), nullable=False)
     state = relationship("State", backref="City")
     places = relationship("Place", backref="cities",
-                          cascade="all, delete-orphan")
+                          cascade="delete")
