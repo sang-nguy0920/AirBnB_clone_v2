@@ -25,6 +25,7 @@ cdict = {
     'Place': Place,
     'Review': Review}
 
+
 class DBStorage():
 
     """inits session"""
@@ -63,9 +64,12 @@ class DBStorage():
             for i in cdict:
                 find = self.__session.query(cdict[i]).all()
                 for y in find:
-                    db_dict[instance.__class__.__name__ + "." + instance.id] = instance
+                    db_dict[
+                        instance.__class__.__name__ +
+                        "." +
+                        instance.id] = instance
             return db_dict
-        
+
         if not cls:
             for instance in self.__session.query().all():
                 return self.__session
