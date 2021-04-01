@@ -15,7 +15,6 @@ from models.review import Review
 import sqlalchemy
 
 
-
 cdict = {
     'BaseModel': BaseModel,
     'User': User,

@@ -14,22 +14,23 @@ from models.review import Review
 
 
 class HBNBCommand(cmd.Cmd):
+
     """ Contains the functionality for the HBNB console"""
 
     # determines prompt for interactive/non-interactive modes
     prompt = '(hbnb) ' if sys.__stdin__.isatty() else ''
 
     classes = {
-               'BaseModel': BaseModel, 'User': User, 'Place': Place,
-               'State': State, 'City': City, 'Amenity': Amenity,
-               'Review': Review
-              }
+        'BaseModel': BaseModel, 'User': User, 'Place': Place,
+        'State': State, 'City': City, 'Amenity': Amenity,
+        'Review': Review
+    }
     dot_cmds = ['all', 'count', 'show', 'destroy', 'update']
     types = {
-             'number_rooms': int, 'number_bathrooms': int,
-             'max_guest': int, 'price_by_night': int,
-             'latitude': float, 'longitude': float
-            }
+        'number_rooms': int, 'number_bathrooms': int,
+        'max_guest': int, 'price_by_night': int,
+        'latitude': float, 'longitude': float
+    }
 
     def preloop(self):
         """Prints if isatty is false"""
@@ -137,13 +138,13 @@ class HBNBCommand(cmd.Cmd):
                     else:
                         continue
                     setattr(new_inst, key, value)
-            storage.save()
+#            storage.new(new_inst)
+            new_inst.save()
             print(new_inst.id)
-            storage.save()
-
+#            storage.save()
         except Exception as e:
             print(e)
-            print("** class doesn't exist **")
+            print(" ** class doesn't exist **")
 
     def help_create(self):
         """ Help information for the create method """
@@ -225,11 +226,11 @@ class HBNBCommand(cmd.Cmd):
             if args not in HBNBCommand.classes:
                 print("** class doesn't exist **")
                 return
-            for k, v in storage._FileStorage__objects.items():
+            for k, v in storage.all(args).items():
                 if k.split('.')[0] == args:
                     print_list.append(str(v))
         else:
-            for k, v in storage._FileStorage__objects.items():
+            for k, v in storage.all(args).items():
                 print_list.append(str(v))
 
         # print(print_list)
