@@ -117,9 +117,5 @@ class DBStorage():
 
         Base.metadata.create_all(self.__engine)
 
-<<<<<<< HEAD
-        self.__session = scoped_session(sessionmaker(bind=self.__engine))
-=======
         sesh = sessionmaker(bind=self.__engine, expire_on_commit=False)
         self.__session = scoped_session(sesh)
->>>>>>> bb6e05f50880146279a8da6f08fca76c58bb2ac6
