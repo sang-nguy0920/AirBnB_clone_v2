@@ -11,7 +11,6 @@ from os.path import exists
 env.hosts = ['35.237.133.200', '54.160.239.103']
 
 
-
 def do_deploy(archive_path):
     """distributes an archive to the web servers"""
     if exists(archive_path) is False:
@@ -30,6 +29,6 @@ def do_deploy(archive_path):
         run('sudo rm -rf /data/web_static/current')
         run('sudo ln -s {}{}/ /data/web_static/current'.format(path, null_ext))
         return True
-    
+
     except:
         return False
